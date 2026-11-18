@@ -21,4 +21,8 @@ def generate_ai_content(prompt: str , system: str = None) -> str:
         raise ValueError('Model output was empty or invalid')
     return cleaned_result
 #ملف ال utils بنستخدمه لما تكون في خدمة مشتركة على سبيل المثال في عنا خدمة توليد نصوص ال utils بعمل validate للعنوان هل هو صحيخ او لا وبعدين بعمل توليد لل content وطبعا لازم نعمل clean للنتيجة لانه ممكن يكون مش مرتب
+def truncate_text(text: str, max_length: int = 500) -> str:
+    if len(text) > max_length:
+        return text[:max_length]
+    return text
 

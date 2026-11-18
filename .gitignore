@@ -1,5 +1,5 @@
 .env
 *.sqlite
 .venv
-__pycache__git add .
-git commit --amend -m "Initial commit"
+__pycache__
+.idea/

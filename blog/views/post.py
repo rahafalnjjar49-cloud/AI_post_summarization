@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from ..serializers import PostSerializers
 from ..models import Post
+from ..ai_content.service.summarize import summarize_post
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -26,5 +27,13 @@ def get_posts(request):  #في الاعلى كان Default وكان عبارة �
             {'error':'An unexpected error occurred!'},
             status = status.HTTP_500_INTERNAL_SERVER_ERROR, #لما انا احكي 500 يعني الايرور من عندي انا كسيرفر, عشان اعرف انه المشكلة من جهتي
         )
+
+@api_view(['POST'])
+def summarize_post_view(request, post_id):
+    try:
+        result = summarize_post(post_id)
+        return Response(result, status=status.HTTP_200_OK)
+    except ValueError as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
